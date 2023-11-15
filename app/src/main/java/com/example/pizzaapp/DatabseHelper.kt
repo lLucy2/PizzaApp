@@ -1,24 +1,28 @@
 package com.example.pizzaapp
 
+import android.annotation.SuppressLint
+import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import android.widget.Toast
 
-class DatabseHelper(context: Context): SQLiteOpenHelper(
+class DatabseHelper(var context: Context): SQLiteOpenHelper(
     context, DATABASE_NAME, null, DATABSE_VERSION){
 
     companion object {
-        private  val DATABASE_NAME = "pizza"
-        private  val DATABSE_VERSION = 1
 
-        // TABLES
-        private  val TABLE_ACCOUNT = "account"
+            private  val DATABASE_NAME = "pizza"
+            private  val DATABSE_VERSION = 1
 
-        // COLUMS
-        private  val COLUMN_EMAIL = "email"
-        private  val COLUMN_NAME = "name"
-        private  val COLUMN_LEVEL = "level"
-        private  val COLUMN_PASSWORD = "password"
+            // TABLES
+            private  val TABLE_ACCOUNT = "account"
+
+            // COLUMS
+            private  val COLUMN_EMAIL = "email"
+            private  val COLUMN_NAME = "name"
+            private  val COLUMN_LEVEL = "level"
+            private  val COLUMN_PASSWORD = "password"
 
     }
 
@@ -54,6 +58,49 @@ class DatabseHelper(context: Context): SQLiteOpenHelper(
 
         return cursorCount > 0
     }
+
+    fun addAcount(email:String, name:String, level:String, password:String){
+        val db = this.readableDatabase
+
+        val values = ContentValues()
+        values.put(COLUMN_EMAIL, email)
+        values.put(COLUMN_NAME, name)
+        values.put(COLUMN_LEVEL, level)
+        values.put(COLUMN_PASSWORD, password)
+
+        val result = db.insert(TABLE_ACCOUNT, null, values)
+        // show message
+        if (result == (0).toLong()){
+            Toast.makeText(context, "Register Failed", Toast.LENGTH_SHORT)
+        } else {
+            Toast.makeText(context, "Register Success, Please Login Using Your New Account", Toast.LENGTH_SHORT).show()
+        }
+
+        db.close()
+
+    }
+
+    @SuppressLint("Range")
+    fun checkData(email:String): String {
+        val colums = arrayOf(COLUMN_NAME)
+        val db = this.readableDatabase
+        val selection = "$COLUMN_EMAIL = ?"
+        val selectionArgs = arrayOf(email)
+        var name:String = ""
+
+        val cursor = db.query(TABLE_ACCOUNT, colums, selection, selectionArgs, null, null, null)
+
+        if(cursor.moveToFirst()){
+            name = cursor.getString(cursor.getColumnIndex(COLUMN_NAME))
+        }
+
+
+    cursor.close()
+    db.close()
+    return name
+
+    }
+
 
 
 }
