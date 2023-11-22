@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.widget.Toast
 
-class DatabseHelper(var context: Context): SQLiteOpenHelper(
+class DatabaseHelper(var context: Context): SQLiteOpenHelper(
     context, DATABASE_NAME, null, DATABSE_VERSION){
 
     companion object {
@@ -100,7 +100,4 @@ class DatabseHelper(var context: Context): SQLiteOpenHelper(
     return name
 
     }
-
-
-
 }

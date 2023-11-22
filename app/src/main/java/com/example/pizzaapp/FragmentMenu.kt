@@ -1,12 +1,14 @@
 package com.example.pizzaapp
 
+import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 // TODO: Rename parameter arguments, choose names that match
@@ -34,6 +36,7 @@ class FragmentMenu : Fragment() {
         }
     }
 
+    @SuppressLint("MissingInflatedId")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -43,6 +46,16 @@ class FragmentMenu : Fragment() {
         val rvmenu:RecyclerView = view.findViewById(R.id.recyclerMenu)
         rvmenu.layoutManager = GridLayoutManager(activity,2)
         rvmenu.adapter = MenuAdapter()
+
+
+        // Instance button add menu
+        val btnAdd: Button =  view.findViewById(R.id.buttonAddMenu)
+
+        btnAdd.setOnClickListener {
+            requireActivity().run {
+                startActivity(Intent(this,AddMenuActivity::class.java))
+            }
+        }
 
         return view
     }

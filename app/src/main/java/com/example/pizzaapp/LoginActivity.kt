@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 
 class LoginActivity : AppCompatActivity() {
@@ -20,11 +21,11 @@ class LoginActivity : AppCompatActivity() {
         val txtPassword:EditText = findViewById(R.id.editTextPassword)
         //instance button login
         val btnLogin:Button = findViewById(R.id.buttonLogin)
-//        val tvRegis:TextView = findViewById(R.id.tv_regis)
+        val tvRegis: TextView = findViewById(R.id.textViewRegister)
 
         //event button login
         btnLogin.setOnClickListener {
-            val dbHelper = DatabseHelper(this)
+            val dbHelper = DatabaseHelper(this)
 
             //check data
            val data:String = dbHelper.checkData("rayfebriantomasila@students.amikom.ac.id")
@@ -41,7 +42,7 @@ class LoginActivity : AppCompatActivity() {
 
             val result:Boolean = dbHelper.checkLogin(txtUsername.text.toString(), txtPassword.text.toString())
 
-            if (result == true) {
+            if (result) {
                 Toast.makeText(this@LoginActivity, "Login Success", Toast.LENGTH_SHORT).show()
                 val intentLogin = Intent(this@LoginActivity, MainActivity::class.java)
                 startActivity(intentLogin)
@@ -54,7 +55,11 @@ class LoginActivity : AppCompatActivity() {
 
         }
 
-
+        tvRegis.setOnClickListener{
+            val intentRegis = Intent(this@LoginActivity,
+                RegisterActivity::class.java)
+            startActivity(intentRegis)
+        }
 
     }
 }
