@@ -8,12 +8,12 @@ import android.database.sqlite.SQLiteOpenHelper
 import android.widget.Toast
 
 class DatabaseHelper(var context: Context): SQLiteOpenHelper(
-    context, DATABASE_NAME, null, DATABSE_VERSION){
+    context, DATABASE_NAME, null, DATABASE_VERSION){
 
     companion object {
 
             private  val DATABASE_NAME = "pizza"
-            private  val DATABSE_VERSION = 1
+            private  val DATABASE_VERSION = 1
 
             // TABLES
             private  val TABLE_ACCOUNT = "account"

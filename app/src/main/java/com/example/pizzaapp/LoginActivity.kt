@@ -31,18 +31,13 @@ class LoginActivity : AppCompatActivity() {
            val data:String = dbHelper.checkData("rayfebriantomasila@students.amikom.ac.id")
             Toast.makeText(this@LoginActivity, "Result : $data", Toast.LENGTH_SHORT).show()
 
-            if (data == null){
-                //insert data
-                dbHelper.addAcount("rayfebriantomasila@students.amikom.ac.id","Ray Febrian T.","Kasir","12345")
-            }
-
             val email = txtUsername.text.toString().trim()
             val password = txtPassword.text.toString().trim()
 
 
             val result:Boolean = dbHelper.checkLogin(txtUsername.text.toString(), txtPassword.text.toString())
 
-            if (result) {
+            if (result == true) {
                 Toast.makeText(this@LoginActivity, "Login Success", Toast.LENGTH_SHORT).show()
                 val intentLogin = Intent(this@LoginActivity, MainActivity::class.java)
                 startActivity(intentLogin)
@@ -56,8 +51,7 @@ class LoginActivity : AppCompatActivity() {
         }
 
         tvRegis.setOnClickListener{
-            val intentRegis = Intent(this@LoginActivity,
-                RegisterActivity::class.java)
+            val intentRegis = Intent(this@LoginActivity, RegisterActivity::class.java)
             startActivity(intentRegis)
         }
 

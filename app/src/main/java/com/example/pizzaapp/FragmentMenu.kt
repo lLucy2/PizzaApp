@@ -36,24 +36,27 @@ class FragmentMenu : Fragment() {
         }
     }
 
-    @SuppressLint("MissingInflatedId")
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_menu, container, false)
-        val rvmenu:RecyclerView = view.findViewById(R.id.recyclerMenu)
-        rvmenu.layoutManager = GridLayoutManager(activity,2)
-        rvmenu.adapter = MenuAdapter()
+        val rvmenu: RecyclerView? = view?.findViewById(R.id.recyclerMenu)
+        rvmenu?.layoutManager = GridLayoutManager(activity, 2)
+        rvmenu?.adapter = MenuAdapter()
+
+
 
 
         // Instance button add menu
-        val btnAdd: Button =  view.findViewById(R.id.buttonAddMenu)
+        val btnAdd: Button? =  view?.findViewById(R.id.buttonAddMenu)
 
-        btnAdd.setOnClickListener {
-            requireActivity().run {
-                startActivity(Intent(this,AddMenuActivity::class.java))
+        if (btnAdd != null) {
+            btnAdd.setOnClickListener {
+                requireActivity().run {
+                    startActivity(Intent(this,AddMenuActivity::class.java))
+                }
             }
         }
 

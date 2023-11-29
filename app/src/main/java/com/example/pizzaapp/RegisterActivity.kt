@@ -20,6 +20,7 @@ class RegisterActivity : AppCompatActivity() {
 
         //instance button Register
         val btnRegister: Button = findViewById(R.id.buttonRegisterAccount)
+        val btnHome: Button = findViewById(R.id.buttonHome)
 
         btnRegister.setOnClickListener {
             val databaseHelper = DatabaseHelper(this)
@@ -40,11 +41,17 @@ class RegisterActivity : AppCompatActivity() {
                 startActivity(intentLogin)
 
             } else {
-                Toast.makeText(this@RegisterActivity, "Register Failed, Your Email Already Exist",  Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    this@RegisterActivity,
+                    "Register Failed, Your Email Already Exist",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
+        }
 
-
-
+        btnHome.setOnClickListener{
+            val intentHome = Intent(this@RegisterActivity, MainActivity::class.java)
+            startActivity(intentHome)
         }
 
     }
