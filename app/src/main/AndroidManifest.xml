@@ -11,6 +11,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PizzaApp">
         <activity
+            android:name=".EditMenuActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity_edit_menu"
+            android:exported="false" />
+        <activity
             android:name=".RegisterActivity"
             android:exported="false" />
         <activity
